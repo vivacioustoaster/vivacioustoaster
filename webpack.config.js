@@ -31,7 +31,7 @@ module.exports = {
     ],
   },
   output: {
-    path: `${__dirname}/client/dist/`,
+    path: `${__dirname}/client/`,
     filename: 'index.min.js',
   },
   plugins: debug ? [] : [
