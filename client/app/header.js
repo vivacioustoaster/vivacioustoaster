@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { AppBar, Tabs, Tab } from 'material-ui';
 import { Link } from 'react-router';
+import { fbLogin } from '../auth/authActions';
 
 const Header = () => (
   <AppBar title="Name This">

@@ -76,8 +76,8 @@ export const fbLogin = () =>
     fetch('/login/facebook')
         .then(response => {
           console.log(response);
-          // set response.user to the state
           window.sessionStorage.setItem('com.tripsApp', response.token);
+          dispatch(receiveLogin(response.user));
           dispatch(routeActions.push('/home'));
         })
         .catch(err => {
