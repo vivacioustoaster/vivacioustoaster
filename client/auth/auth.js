@@ -2,7 +2,9 @@ import React from 'react';
 
 const Auth = () => (
   <div>
-  we are on auth page!
+    <form action="/auth/facebook">
+      <input type="submit" value="Login with Facebook" />
+    </form>
   </div>
 );
 
