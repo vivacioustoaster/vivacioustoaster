@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
+import cookie from 'react-cookie';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -43,9 +44,17 @@ export const requestLogout = () => ({
 export const logout = () =>
   dispatch => {
     dispatch(requestLogout());
-    window.sessionStorage.removeItem('com.tripsApp');
+    reactCookie.remove('token');
     dispatch(routeActions.push('/'));
   };
+
+export const routeToLogin = () => {
+  if (state.auth.get('isAuthenticated') === false) {
+    return true;
+  }
+  else
+    return false;
+}
 
 export const login = () =>
   dispatch => {
