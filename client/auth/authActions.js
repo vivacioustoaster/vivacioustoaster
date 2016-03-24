@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch';
-import { routeActions } from 'react-router-redux';
+import { polyfill } from 'es6-promise';
+polyfill();
+import { push } from 'react-router-redux';
+import cookie from 'react-cookie';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -36,51 +39,46 @@ export const requestLogout = () => ({
   payload: {
     isAuthenticated: false,
     isFetchingAuth: false,
-    user: null,
+    user: {},
   },
 });
-// place your api calls HURRS
-export const logout = () =>
-  dispatch => {
-    dispatch(requestLogout());
-    window.sessionStorage.removeItem('com.tripsApp');
-    dispatch(routeActions.push('/'));
-  };
 
 export const login = () =>
   dispatch => {
     dispatch(requestLogin());
-
-    const userRequest = new Request('/api/users', {
-      method: 'get',
+    const currentCookie = cookie.load('token');
+    fetch('/api/me', {
+      method: 'GET',
       headers: {
-        token: window.sessionStorage.getItem('com.tripsApp'),
+        Accept: 'application/json',
         'Content-Type': 'application/json',
+        token: currentCookie,
       },
-    });
-
-    fetch(userRequest)
+    })
+      .then(res => res.json())
       .then(response => {
-        console.log(response);
-        // set response.user to the state
-        dispatch(routeActions.push('/home'));
+        dispatch(receiveLogin(response));
+        dispatch(push('/home'));
       })
       .catch(err => {
+        dispatch(loginError(err));
         console.log('Error on login:', err);
       });
   };
 
-export const fbLogin = () =>
+export const checkForLogin = (isAuthenticated) =>
   dispatch => {
-    dispatch(requestLogin());
-    fetch('/login/facebook')
-        .then(response => {
-          console.log(response);
-          // set response.user to the state
-          window.sessionStorage.setItem('com.tripsApp', response.token);
-          dispatch(routeActions.push('/home'));
-        })
-        .catch(err => {
-          console.log('Error in facebook authentication:', err);
-        });
+    const token = cookie.load('token');
+    if (!isAuthenticated && token) {
+      login()(dispatch);
+    } else if (isAuthenticated) {
+      dispatch(push('/home'));
+    }
+  };
+
+export const logout = () =>
+  dispatch => {
+    dispatch(requestLogout());
+    cookie.remove('token');
+    dispatch(push('/'));
   };
