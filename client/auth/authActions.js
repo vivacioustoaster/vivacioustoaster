@@ -43,16 +43,6 @@ export const requestLogout = () => ({
   },
 });
 
-export const checkForLogin = (isAuthenticated) =>
-  dispatch => {
-    const token = cookie.load('token');
-    if (!isAuthenticated && token){
-      login()(dispatch);
-    } else if (isAuthenticated) {
-      dispatch(push('/home'));
-    }
-  }
-
 export const login = () =>
   dispatch => {
     dispatch(requestLogin());
@@ -74,6 +64,16 @@ export const login = () =>
         dispatch(loginError(err));
         console.log('Error on login:', err);
       });
+  };
+
+export const checkForLogin = (isAuthenticated) =>
+  dispatch => {
+    const token = cookie.load('token');
+    if (!isAuthenticated && token) {
+      login()(dispatch);
+    } else if (isAuthenticated) {
+      dispatch(push('/home'));
+    }
   };
 
 export const logout = () =>

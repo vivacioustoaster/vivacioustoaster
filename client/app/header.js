@@ -14,7 +14,7 @@ let Header = () => (
   <AppBar title="Name This">
     <Link to="/trip"><Tab label="My Trips" /></Link>
     <Link to="/home"><Tab label="Home" /></Link>
-    <button onClick={() => onLogout()}>LOGOUT</button>
+    <button onClick={() => this.onLogout()}>LOGOUT</button>
   </AppBar>
 );
 

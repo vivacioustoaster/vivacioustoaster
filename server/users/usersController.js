@@ -4,8 +4,6 @@ const helpers = require('../config/helpers');
 module.exports = {
 
   getUser: (req, res, next) => {
-    console.log('FROM GETUSER, REQ.USER IS===========', req.user);
-    console.log('req.user type is ', typeof req.user);
     res.json(req.user);
   },
 

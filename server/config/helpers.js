@@ -9,7 +9,6 @@ module.exports = {
   },
 
   decode: (req, res, next) => {
-    console.log('REQ.HEADERS inside DECODE is ========', req.headers);
     const token = req.headers.token;
 
     if (!token) {
