@@ -21,7 +21,9 @@ class Auth extends React.Component {
     return (
       <div>
       we are on auth page!
-      <a href="/auth/facebook">Click to Login through Facebook</a>
+      <form action="/auth/facebook">
+        <button type="login">Login with Facebook</button>
+      </form>
       </div>
     );
   }
