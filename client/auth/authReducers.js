@@ -2,7 +2,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST } from './a
 import { Map } from 'immutable';
 
 const initialState = Map({
-  user: null,
+  user: {},
   isAuthenticated: false,
   isFetchingAuth: false,
 }); // map auth state to the props
