@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import $ from 'jquery';
 import { push } from 'react-router-redux';
 import cookie from 'react-cookie';
 
@@ -51,7 +51,8 @@ export const checkForLogin = (isAuthenticated) =>
       console.log('about to run login()');
       login()(dispatch);
     } else if (isAuthenticated) {
-      dispatch(push('/home'));
+      console.log('ISAUTHENTICATED UPON CHECKFORLOGIN :)');
+      // dispatch(push('/home'));
     }
   }
 
@@ -60,24 +61,60 @@ export const login = () =>
     console.log('inside login');
     dispatch(requestLogin());
 
-    const userRequest = new Request('/api/me', {
-      method: 'get',
+    // const userRequest = new Request('/api/me', {
+    //   method: 'post',
+    //   headers: {
+    //     token: cookie.load('token'),
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+    const currentCookie = cookie.load('token');
+    // console.log('currentCookie in login is ', currentCookie);
+    // fetch('/api/me', {
+    //   method: 'GET',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     token: currentCookie,
+    //   },
+    // })
+    $.ajax({
+      url: '/api/me',
+      type: 'GET',
       headers: {
-        token: cookie.load('token'),
-        'Content-Type': 'application/json',
+        token: currentCookie,
       },
-    });
-
-    fetch(userRequest)
-      .then(response => {
-        console.log(response);
+      contentType: 'application/json',
+      success: (response) => {
+        console.log('RESPONSE FROM USERREQUEST IS ---', response);
         dispatch(receiveLogin(response));
         // set response.user to the state
-        dispatch(push('/home'));
-      })
-      .catch(err => {
+        // dispatch(push('/home'));
+      },
+      error: (err) => {
         console.log('Error on login:', err);
-      });
+      },
+    });
+    // var options = {
+    //   uri: '/api/me',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     token: currentCookie,
+    //   },
+    //   json: true // Automatically parses the JSON string in the response
+    // };
+
+    // rp(options)
+    //   .then(response => {
+    //     console.log('RESPONSE FROM USERREQUEST IS ---', response);
+    //     dispatch(receiveLogin(response));
+    //     // set response.user to the state
+    //     // dispatch(push('/home'));
+    //   })
+    //   .catch(err => {
+    //     console.log('Error on login:', err);
+    //   });
   };
 
 export const logout = () =>

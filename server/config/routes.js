@@ -1,16 +1,17 @@
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
-const usersController = require('../users/usersController');
 const destinationsController = require('../destinations/destinationsController');
 const eventsController = require('../events/eventsController');
 const tagsController = require('../tags/tagsController');
 const tripsController = require('../trips/tripsController');
-const userController = require('../users/usersController');
+const usersController = require('../users/usersController');
 const User = require('../users/users');
+const helper = require('./helpers');
 
 module.exports = function (app, express) {
   // Users
-  app.get('api/me', usersController.getUser);
+  app.use('/api/me', helper.decode);
+  app.get('/api/me', usersController.getUser);
   app.get('/api/me/friends', usersController.getFriends);
 
 

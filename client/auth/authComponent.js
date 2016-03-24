@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import auth from '../auth/authReducers';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {

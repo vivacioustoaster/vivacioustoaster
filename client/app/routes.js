@@ -8,7 +8,15 @@ import Query from '../query/queryList';
 import Tag from '../tag/tagList';
 import Trip from '../trip/tripList';
 import TripPlan from '../tripPlan/tripPlan';
-import { requireAuthentication } from '../auth/authComponent';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
+import { push } from 'react-router-redux';
+
+const requireAuthentication = UserAuthWrapper({
+  authSelector: state => state.auth.user, // how to get the user state
+  failureRedirectPath: '/auth',
+  redirectAction: push, // the redux action to dispatch for redirect
+  wrapperDisplayName: 'UserIsAuthenticated', // a nice name for this auth check
+})
 
 export default (
   <Route path="/" component={App}>
