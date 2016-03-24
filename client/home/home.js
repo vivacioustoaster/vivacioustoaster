@@ -4,7 +4,6 @@ import TripTypeList from './tripTypeList';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 
-
 const Home = () => (
   <div>
     <DestSearch />
