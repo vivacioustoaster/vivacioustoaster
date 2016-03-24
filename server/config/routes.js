@@ -48,7 +48,8 @@ module.exports = function (app, express) {
     (req, res) => {
       User.createToken(req.user.id)
       .then(response => {
-        // res.redirect('home');
+        res.cookie('token', response.token);
+        res.redirect('/');
         res.json(response);
       });
     });

@@ -5,7 +5,9 @@ const initialState = Map({
   user: null,
   isAuthenticated: false,
   isFetchingAuth: false,
-});
+}); // map auth state to the props
+// and then in component.prop.types, require that state
+
 
 export default (state = initialState, action) => {
   switch (action.type) {

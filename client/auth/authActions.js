@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { routeActions } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import cookie from 'react-cookie';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -41,29 +41,29 @@ export const requestLogout = () => ({
   },
 });
 // place your api calls HURRS
-export const logout = () =>
-  dispatch => {
-    dispatch(requestLogout());
-    reactCookie.remove('token');
-    dispatch(routeActions.push('/'));
-  };
 
-export const routeToLogin = () => {
-  if (state.auth.get('isAuthenticated') === false) {
-    return true;
+export const checkForLogin = (isAuthenticated) =>
+  dispatch => {
+    const token = cookie.load('token');
+    console.log('inside CheckForLogin, isAuthenticated is ', isAuthenticated);
+    console.log('Token is ', token);
+    if (!isAuthenticated && token){
+      console.log('about to run login()');
+      login()(dispatch);
+    } else if (isAuthenticated) {
+      dispatch(push('/home'));
+    }
   }
-  else
-    return false;
-}
 
 export const login = () =>
   dispatch => {
+    console.log('inside login');
     dispatch(requestLogin());
 
-    const userRequest = new Request('/api/users', {
+    const userRequest = new Request('/api/me', {
       method: 'get',
       headers: {
-        token: window.sessionStorage.getItem('com.tripsApp'),
+        token: cookie.load('token'),
         'Content-Type': 'application/json',
       },
     });
@@ -71,25 +71,18 @@ export const login = () =>
     fetch(userRequest)
       .then(response => {
         console.log(response);
+        dispatch(receiveLogin(response));
         // set response.user to the state
-        dispatch(routeActions.push('/home'));
+        dispatch(push('/home'));
       })
       .catch(err => {
         console.log('Error on login:', err);
       });
   };
 
-export const fbLogin = () =>
+export const logout = () =>
   dispatch => {
-    dispatch(requestLogin());
-    fetch('/login/facebook')
-        .then(response => {
-          console.log(response);
-          // set response.user to the state
-          window.sessionStorage.setItem('com.tripsApp', response.token);
-          dispatch(routeActions.push('/home'));
-        })
-        .catch(err => {
-          console.log('Error in facebook authentication:', err);
-        });
+    dispatch(requestLogout());
+    cookie.remove('token');
+    dispatch(push('/'));
   };
