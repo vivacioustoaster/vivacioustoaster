@@ -23,10 +23,3 @@ export const save = (destinations, tripType, friends) =>
     }).then(res => res.json())
       .then(trip => dispatch(setTripAndGetDestinations(trip)))
       .catch(err => console.error(err)); // add proper error handling
-
-export const toggleEvent = event => ({
-  type: 'TOGGLE_EVENT',
-  payload: {
-    event,
-  },
-});
