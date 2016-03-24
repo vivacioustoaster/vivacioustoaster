@@ -10,14 +10,14 @@ import cookie from 'react-cookie';
 
 
 class Auth extends React.Component {
-  componentDidMount() {
-    this.props.onCheckForLogin(this.props.isAuthenticated);
-  }
   componentWillMount() {
     this.props.onCheckForLogin(this.props.isAuthenticated);
   }
+  componentDidMount() {
+    this.props.onCheckForLogin(this.props.isAuthenticated);
+  }
 
-  render (){
+  render() {
     return (
       <div>
       we are on auth page!
@@ -39,10 +39,10 @@ const mapDispatchToProps = (dispatch) => ({
 Auth = connect(mapStateToProps, mapDispatchToProps)(Auth);
 
 
-// Auth.propTypes = {
-//   isAuthenticated: React.PropTypes.bool,
-//   onCheckForLogin: React.PropTypes.func,
-// }
+Auth.propTypes = {
+  isAuthenticated: React.PropTypes.bool,
+  onCheckForLogin: React.PropTypes.func,
+};
 
 
 export default Auth;
