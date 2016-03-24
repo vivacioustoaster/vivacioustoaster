@@ -12,11 +12,11 @@ import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { push } from 'react-router-redux';
 
 const requireAuthentication = UserAuthWrapper({
-  authSelector: state => state.auth.user, // how to get the user state
+  authSelector: state => state.auth.get('user'),
   failureRedirectPath: '/auth',
-  redirectAction: push, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated', // a nice name for this auth check
-})
+  redirectAction: push,
+  wrapperDisplayName: 'UserIsAuthenticated',
+});
 
 export default (
   <Route path="/" component={App}>
