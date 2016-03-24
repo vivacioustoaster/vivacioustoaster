@@ -32,8 +32,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-//   // login: () => { dispatch(login()); },
-//   // goHome: () => { dispatch(push('/home')); },
   onCheckForLogin: bindActionCreators(checkForLogin, dispatch),
 });
 Auth = connect(mapStateToProps, mapDispatchToProps)(Auth);
