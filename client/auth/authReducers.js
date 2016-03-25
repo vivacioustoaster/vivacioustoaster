@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return state.set('isFetchingAuth', action.payload.isFetchingAuth);
+    // TODO LOGIN_FAILURE
     case LOGIN_SUCCESS:
       state = state.set('user', action.payload.user);
       state = state.set('isFetchingAuth', action.payload.isFetchingAuth);
