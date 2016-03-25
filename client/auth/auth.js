@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { push } from 'react-router-redux';
-import { requestLogin, receiveLogin, loginError, requestLogout,
-  logout, login, fbLogfin, checkForLogin } from './authActions';
+import { checkForLogin } from './authActions';
 import { Map } from 'immutable';
 import cookie from 'react-cookie';
 
