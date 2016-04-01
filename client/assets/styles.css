@@ -233,6 +233,14 @@ div.tooltip:hover span.tooltip-text {
   color: white;
 }
 
+.tags {
+  width: 60%,
+  height: 100%,
+  overflow-y: auto,
+  margin: 5% 20%,
+  visibility: loading ? hidden : visible,
+}
+
 img.event-item {
   min-height:15em;
   max-height:25em;
