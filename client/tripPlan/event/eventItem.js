@@ -11,11 +11,6 @@ import ThumbUp from 'material-ui/lib/svg-icons/action/thumb-up';
 
 const EventItem = ({ key, name, address, rating, tags, votes, photoUrl, voteOn }) => (
   <Card style={ { width: '75%', margin: '5% 12.5%' } }>
-    <CardHeader title={votes.length}
-      avatar={<FloatingActionButton mini secondary onClick={voteOn}>
-        <ThumbUp />
-      </FloatingActionButton>}
-    />
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
@@ -31,6 +26,10 @@ const EventItem = ({ key, name, address, rating, tags, votes, photoUrl, voteOn }
             style={{ margin: '0 2.5%' }}
             children={<span className="tooltip-text">{tag}</span>}
           />
+          <FloatingActionButton mini secondary onClick={voteOn}>
+            <ThumbUp />
+          </FloatingActionButton>
+          <span>{votes.length}</span>
         </div>
       )}
     </CardText>
