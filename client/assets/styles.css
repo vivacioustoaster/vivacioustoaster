@@ -266,6 +266,12 @@ img.dest-item {
     width:250px;
   }
 
+  .gridTile{
+    min-width: 100% !important;
+    clear: both;
+    width: 300px;
+  }
+
   .datePicker {
     width: 60% !important;
     margin: 0;
@@ -293,6 +299,25 @@ img.dest-item {
     height: 3em;
     right: 0;
     top: 60%;
+  }
+  .tagContainer .cardStyle{
+    margin: 0% 0%;
+    width: 600px !important;
+  }
+  .gridTile{
+    width: 100% !important;
+  }
+  div.gridList {
+  width: 100% !important;
+  margin-left: -130px;
+  }
+  .tagContainer {
+    margin-left: -80px;
+    width: 100%;
+  }
+
+  .tagContainer>div{
+    width: 100% !important;
   }
 }
 
