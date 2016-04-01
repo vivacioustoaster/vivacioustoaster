@@ -41,6 +41,11 @@ div.tooltip:hover span.tooltip-text {
   opacity: 1;
 }
 
+.voteIcon {
+  float: right;
+  margin-top: -25px;
+}
+
 #destSearch {
   justify-content: center;
   margin: 0% 80% 0% 20%;
