@@ -150,7 +150,7 @@ div.tooltip:hover span.tooltip-text {
 .logo {
   color: #00cc00;
   text-align: center;
-  text-shadow: -0.07em 0.04em #777777;
+  text-shadow: -0.04em 0.02em #777777;
   justify-content: center;
   font-family: 'Cinzel', serif;
   font-size: 8em;
@@ -233,6 +233,14 @@ div.tooltip:hover span.tooltip-text {
   color: white;
 }
 
+.tags {
+  width: 60%,
+  height: 100%,
+  overflow-y: auto,
+  margin: 5% 20%,
+  visibility: loading ? hidden : visible,
+}
+
 img.event-item {
   min-height:15em;
   max-height:25em;
@@ -256,6 +264,12 @@ img.dest-item {
   }
   .geosuggest__suggests {
     width:250px;
+  }
+
+  .gridTile{
+    min-width: 100% !important;
+    clear: both;
+    width: 300px;
   }
 
   .datePicker {
@@ -285,6 +299,25 @@ img.dest-item {
     height: 3em;
     right: 0;
     top: 60%;
+  }
+  .tagContainer .cardStyle{
+    margin: 0% 0%;
+    width: 600px !important;
+  }
+  .gridTile{
+    width: 100% !important;
+  }
+  div.gridList {
+  width: 100% !important;
+  margin-left: -130px;
+  }
+  .tagContainer {
+    margin-left: -80px;
+    width: 100%;
+  }
+
+  .tagContainer>div{
+    width: 100% !important;
   }
 }
 

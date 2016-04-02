@@ -41,7 +41,7 @@ const styles = {
 };
 
 let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage, destId, startLoadEvents, endLoadEvents, loading }) => ( // eslint-disable-line
-  <div style={styles.block}>
+  <div style={styles.block} className="tagContainer">
     <img src="../assets/spinning-globe.gif"
       style={{
         position: 'fixed',
@@ -51,12 +51,13 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
         visibility: loading ? 'visible' : 'hidden',
       }}
     />
-    <Card style={ { width: '60%', margin: '5% 20%', padding: '1.5%' } }>
+    <Card class="cardStyle" style={ { width: '60%', margin: '5% 20%', padding: '1.5%' } }>
       <CardHeader
         title={'Sightseeing, relaxation, adventure...choose a few tags below, and we\'ll suggest places you\'ll love!'} // eslint-disable-line
       />
       <GridList
         cellHeight={200}
+        class="gridList"
         style={{
           visibility: loading ? 'hidden' : 'visible',
         }}
@@ -65,6 +66,8 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
           <GridTile
             key={tag.img}
             title={tag.name}
+            class="gridTile"
+            style={ { width: '100%', height: '100%', display: 'flex' } }
             actionIcon=
               {<IconButton onClick={() => onToggleTag(tag.name)}>
                 {tag.addedToTrip ?

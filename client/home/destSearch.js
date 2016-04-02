@@ -27,7 +27,7 @@ class DestSearch extends React.Component {
   render() {
     return (
       <div id="destSearch">
-        <Geosuggest placeholder="ex: London" onBlur={event =>
+        <Geosuggest placeholder="Destination" onBlur={event =>
           event ? this.props.onChangeDestination(event.value) : null
         }
           onSuggestSelect={suggest => this.props.onChangeDestination(suggest.label)}
