@@ -20,8 +20,12 @@ const mapDispatchToProps = dispatch => ({
 let Header = ({ onLogout, onClickTrips, onClear, onDeselect, onClearEvents }) => (
   <AppBar title="voyAger" className="header" showMenuIconButton={false}>
     <img src="../assets/planelogo.png" id="headerLogo" style={ { width: '40px' } } />
-    <Link to="/trip"><Tab label="My Trips" onClick={ () =>
-      onClickTrips() }
+    <Link to="/trip"><Tab label="My Trips" onClick={ () => {
+      onClickTrips();
+      onClearEvents();
+      onClear();
+      onDeselect();
+    }}
     />
     </Link>
     <Link to="/home"><Tab label="Home" onClick={ () => {

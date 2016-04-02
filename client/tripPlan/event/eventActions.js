@@ -40,8 +40,10 @@ export const fetchEvents = (destination, userId) =>
       },
     }).then(res => res.json())
       .then(events => {
-        dispatch(receiveEventsInDest(events));
-        dispatch(fetchVotes(events, userId));
+        dispatch(receiveEventsInDest(events))
+        .then(() =>
+            dispatch(fetchVotes(events, userId))
+          );
       })
       .catch(err => console.error(err)); // add proper error handling
   };
