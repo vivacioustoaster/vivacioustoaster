@@ -1,6 +1,4 @@
 # Voyager
-AI Travel Agent
-> Pithy project description
 An intelligent, group-oriented decision-making travel app to help find places that fit your interests.
 
 ## Team
@@ -30,7 +28,7 @@ Run `npm test` to run tests.
 
 - Node 5.4.x
 - Redis 2.6.x
-- Postgresql 9.3.x
+- PostgreSQL 9.3.x
 
 ## Development
 
