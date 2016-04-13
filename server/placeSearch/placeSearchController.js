@@ -141,29 +141,5 @@ module.exports = {
       res.json(curatedPlacesArr);
     })
     .catch(err => helpers.errorHandler(err, req, res, next));
-
-    // Leaving this in if we want to get Google Places data directly for dev purposes
-    // ------------------------------------------------------------------------------
-
-    // const options = {
-    //   uri: GOOGLE_PLACES_URL,
-    //   qs: {
-    //     key: process.env.GOOGLE_PLACES_KEY, // -> uri + '?key={{KEY}}'
-    //     query: destinations[0].location,
-    //     types: 'amusement_park|zoo|aquarium',
-    //   },
-    //   headers: {
-    //     'User-Agent': 'Request-Promise',
-    //   },
-    //   json: true, // Automatically parses the JSON string in the response
-    // };
-
-    // rp(options)
-    //   .then(data => {
-    //     res.json(data);
-    //   })
-    //   .catch(err => {
-    //     res.status(500).end();
-    //   });
   },
 };
