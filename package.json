@@ -4,7 +4,7 @@
   "description": "Group travel made easy",
   "main": "webpack.config.js",
   "scripts": {
-    "start":"forever start server/server.js",
+    "start": "forever start server/server.js",
     "test": "karma start && mocha server/__tests__/.",
     "lint": "eslint .",
     "validate": "npm ls"
@@ -37,7 +37,7 @@
     "dotenv": "^2.0.0",
     "es6-promise": "^3.1.2",
     "eslint-config-airbnb": "^6.1.0",
-    "express": "^4.13.4",
+    "express": "^4.10.2",
     "forever": "^0.15.1",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
@@ -72,6 +72,7 @@
     "request-promise": "^2.0.1",
     "require": "^2.4.20",
     "sequelize": "^3.19.3",
+    "socket.io": "^1.4.6",
     "webpack": "^1.12.14"
   },
   "devDependencies": {
