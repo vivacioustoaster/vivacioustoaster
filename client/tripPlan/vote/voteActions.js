@@ -2,6 +2,8 @@ import _ from 'lodash';
 import fetch from 'isomorphic-fetch';
 import cookie from 'react-cookie';
 import Promise from 'bluebird';
+import io from 'socket.io-client';
+const socket = io();
 
 export const REQUEST_VOTES = 'REQUEST_VOTES';
 export const RECEIVE_VOTES = 'RECEIVE_VOTES';
@@ -96,18 +98,7 @@ export const fetchVotes = (events, userId) =>
     .catch(err => console.error(err)); // add proper error handling
   };
 
-export const voteOnEvent = (eventId, userId, hasVoted) =>
-  dispatch => {
-    dispatch(toggleVote(eventId, userId, hasVoted));
-    const token = cookie.load('token');
-    return fetch(`api/events/${eventId}/votes`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token,
-      },
-    })
-    .catch(err => console.error(err));
-  };
+export const voteOnEvent = (eventId, userId, hasVoted) => {
+  socket.emit('newVote', eventId, userId, hasVoted);
+};
 
