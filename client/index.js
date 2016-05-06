@@ -6,9 +6,20 @@ import configureStore from './store/configureStore';
 import routes from './app/routes';
 import { syncHistoryWithStore } from 'react-router-redux';
 import DevTools from './containers/DevTools';
+import io from 'socket.io-client';
+import { toggleVote } from './tripPlan/vote/voteActions';
+
+const startVoting = store => {
+  const socket = io();
+  socket.on('votes', (eventId, userId, picUrl, hasVoted) => {
+    store.dispatch(toggleVote(eventId, userId, picUrl, hasVoted));
+  });
+};
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
+
+startVoting(store);
 
 render(
   <Provider store={store}>

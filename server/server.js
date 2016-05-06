@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 // dotenv sets up the process.env variables. Put env variables in a .env file in your root
 require('dotenv').config({ path: `${__dirname}/../.env` });
 const PORT = process.env.PORT;
@@ -7,7 +8,7 @@ const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const db = require('./config/db.js');
 const User = require('./users/users');
-
+const Vote = require('./votes/votes');
 
 require('./config/middleware.js')(app, express);
 // Initialize Passport and restore authentication state, if any, from the
@@ -18,8 +19,22 @@ app.use(passport.session());
 require('./config/routes.js')(app, express);
 
 app.set('port', PORT);
-app.listen(PORT);
+const server = app.listen(PORT);
 console.log(`Listening on port ${PORT}`);
+
+// Voting on events using Socket.io
+
+const io = require('socket.io')(server);
+
+io.on('connection', socket => {
+  console.log('New client connected!');
+
+  socket.on('newVote', (eventId, userId, picUrl, hasVoted) => {
+    Vote.createOrDeleteVote(userId, eventId, picUrl).then(() => {
+      io.emit('votes', eventId, userId, picUrl, hasVoted);
+    });
+  });
+});
 
 // PASSPORT FACEBOOK STRATEGY configuration=================
 

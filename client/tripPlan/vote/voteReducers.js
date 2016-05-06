@@ -18,6 +18,7 @@ const votes = (state = initialState, action) => {
       const newVote = {
         eventId: action.payload.eventId,
         userId: action.payload.userId,
+        picUrl: action.payload.picUrl,
       };
       const oldVotes = state.get('votes');
       return state.set('votes', oldVotes.push(newVote));
