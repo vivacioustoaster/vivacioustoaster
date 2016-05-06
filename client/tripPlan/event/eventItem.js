@@ -40,6 +40,11 @@ const EventItem = ({ key, name, address, rating, tags, votes, photoUrl, voteOn }
           <ThumbUp />
         </FloatingActionButton>
       </Badge>
+      {votes.map(vote =>
+        <div className="voterPics">
+          <Avatar src={vote.picUrl} />
+        </div>
+      ).slice(-3)}
     </CardText>
   </Card>
 );
