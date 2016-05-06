@@ -29,11 +29,9 @@ const io = require('socket.io')(server);
 io.on('connection', socket => {
   console.log('New client connected!');
 
-  socket.on('newVote', (eventId, userId, hasVoted) => {
-    Vote.createOrDeleteVote(userId, eventId).then(() => {
-      Vote.getAllVotes(eventId).then(votes => {
-        io.emit('votes', eventId, userId, hasVoted);
-      });
+  socket.on('newVote', (eventId, userId, picUrl, hasVoted) => {
+    Vote.createOrDeleteVote(userId, eventId, picUrl).then(() => {
+      io.emit('votes', eventId, userId, picUrl, hasVoted);
     });
   });
 });

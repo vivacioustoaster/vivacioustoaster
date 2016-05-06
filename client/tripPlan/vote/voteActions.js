@@ -20,11 +20,12 @@ export const toggleEventVote = eventId => ({
   },
 });
 
-export const addVote = (eventId, userId) => ({
+export const addVote = (eventId, userId, picUrl) => ({
   type: ADD_VOTE,
   payload: {
     eventId,
     userId,
+    picUrl,
   },
 });
 
@@ -36,12 +37,12 @@ export const deleteVote = (eventId, userId) => ({
   },
 });
 
-export const toggleVote = (eventId, userId, hasVoted) =>
+export const toggleVote = (eventId, userId, picUrl, hasVoted) =>
   dispatch => {
     if (hasVoted) {
       dispatch(deleteVote(eventId, userId));
     } else {
-      dispatch(addVote(eventId, userId));
+      dispatch(addVote(eventId, userId, picUrl));
     }
     dispatch(toggleEventVote(eventId));
   };
@@ -98,7 +99,7 @@ export const fetchVotes = (events, userId) =>
     .catch(err => console.error(err)); // add proper error handling
   };
 
-export const voteOnEvent = (eventId, userId, hasVoted) => {
-  socket.emit('newVote', eventId, userId, hasVoted);
+export const voteOnEvent = (eventId, userId, picUrl, hasVoted) => {
+  socket.emit('newVote', eventId, userId, picUrl, hasVoted);
 };
 

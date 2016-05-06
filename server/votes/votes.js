@@ -2,7 +2,9 @@ const db = require('../config/db');
 const Sequelize = require('sequelize');
 const User = require('../users/users');
 const Event = require('../events/events');
-const Vote = db.define('votes', {});
+const Vote = db.define('votes', {
+  picUrl: Sequelize.STRING,
+});
 
 // creates userId column in votes table
 // creates eventId column in votes table
@@ -18,12 +20,12 @@ Vote.sync();
 User.sync();
 Event.sync();
 
-Vote.createOrDeleteVote = (userId, eventId) =>
+Vote.createOrDeleteVote = (userId, eventId, picUrl) =>
   Vote.findOne({ where: { userId, eventId } }).then(vote => {
     if (vote) {
       return Vote.destroy({ where: { id: vote.dataValues.id } });
     }
-    return Vote.create({ userId, eventId }, { returning: true });
+    return Vote.create({ userId, eventId, picUrl }, { returning: true });
   })
   .catch(err => err);
 

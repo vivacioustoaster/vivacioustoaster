@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  voteOnEvents: (eventId, userId, hasVoted) => dispatch(voteOnEvent(eventId, userId, hasVoted)),
+  voteOnEvents: (eventId, userId, picUrl, hasVoted) => dispatch(voteOnEvent(eventId, userId, picUrl, hasVoted)), // eslint-disable-line
 });
 
 let EventList = ({ destinations, destIdx, events, votes, voteOnEvents, user }) => (
@@ -26,7 +26,7 @@ let EventList = ({ destinations, destIdx, events, votes, voteOnEvents, user }) =
       {events.get(destIdx).map((event, i) => {
         const eventVotes = votes.filter(v => v.eventId === event.id);
         return (<EventItem key={ event.id } {...event} votes={eventVotes}
-          voteOn={() => voteOnEvents(event.id, user.id, event.hasVoted)}
+          voteOn={() => voteOnEvents(event.id, user.id, user.picUrl, event.hasVoted)}
         />);
       })}
     </List>

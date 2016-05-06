@@ -11,8 +11,8 @@ import { toggleVote } from './tripPlan/vote/voteActions';
 
 const startVoting = store => {
   const socket = io();
-  socket.on('votes', (eventId, userId, hasVoted) => {
-    store.dispatch(toggleVote(eventId, userId, hasVoted));
+  socket.on('votes', (eventId, userId, picUrl, hasVoted) => {
+    store.dispatch(toggleVote(eventId, userId, picUrl, hasVoted));
   });
 };
 
